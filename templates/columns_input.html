@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сопоставление заголовков</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Сопоставление заголовков и типов данных</h1>
+        <form method="POST" action="{{ url_for('columns_input') }}" enctype="multipart/form-data">
+            <input type="hidden" name="hdfs_file_path" value="{{ hdfs_file_path }}">
+            <input type="hidden" name="hdfs_directory" value="{{ hdfs_directory }}">
+
+            <!-- Поле для ввода имени таблицы -->
+            <div class="form-group">
+                <label for="table_name">Введите имя таблицы:</label>
+                <input type="text" class="form-control" id="table_name" name="table_name" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Заголовки</h5>
+                </div>
+                <div class="col-md-6">
+                    <h5>Типы данных</h5>
+                </div>
+            </div>
+
+            {% for header in headers %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="column_{{ loop.index }}">{{ header }}</label>
+                        <input type="text" class="form-control" id="column_{{ loop.index }}" name="columns_info" value="{{ header }}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="type_{{ loop.index }}">Тип данных для {{ header }}</label>
+                        <input type="text" class="form-control" id="type_{{ loop.index }}" name="types_info" placeholder="Введите тип данных" required>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="form-group">
+                <label for="delimiter">Введите разделитель CSV (по умолчанию запятая):</label>
+                <input type="text" class="form-control" id="delimiter" name="delimiter" value="," required>
+            </div>
+            <button type="submit" class="btn btn-primary">Создать таблицу</button>
+        </form>
+    </div>
+</body>
+</html>

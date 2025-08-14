@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Назначение ролей</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Назначение ролей для таблицы {{ table_name }}</h1>
+        <form method="POST" action="{{ url_for('assign_roles_action', table_name=table_name) }}">
+            <input type="hidden" name="table_name" value="{{ table_name }}">
+            <div class="form-group">
+                <label for="username">Имя пользователя:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="roles">Выберите роль для назначения:</label>
+                <select class="form-control" id="roles" name="role" required>
+                    <option value="ALL">ALL</option>
+                    <option value="SELECT">SELECT</option>
+                    <option value="UPDATE">UPDATE</option>
+                    <option value="INSERT">INSERT</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Назначить роль</button>
+        </form>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Назад</a>
+    </div>
+</body>
+</html>
