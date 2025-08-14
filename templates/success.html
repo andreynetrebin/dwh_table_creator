@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты выполнения</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Результаты выполнения</h1>
+        <ul>
+            <li>Создана внешняя таблица - {{ external_table_name }}</li>
+            <li>На основе внешней таблицы создана таблица - {{ internal_table_name }}</li>
+            <li>Удалена внешняя таблица - {{ external_table_name }}</li>
+        </ul>
+        <a href="{{ url_for('assign_roles', table_name=internal_table_name) }}" class="btn btn-primary">Перейти к назначению ролей для вновь созданной таблицы</a>
+    </div>
+</body>
+</html>
